@@ -1,8 +1,12 @@
 from flask import Flask, jsonify
-from db import teams, players
 from controllers.teams import team_bp
 from controllers.players import player_bp
 from flasgger import Swagger
+from os import environ
+from dotenv import load_dotenv
+
+# Ini untuk load environment variables
+load_dotenv()
 
 app = Flask(__name__)
 swagger_config = {
@@ -26,9 +30,17 @@ app.register_blueprint(player_bp, url_prefix='/players')
 
 @app.route('/hello/', methods=['GET', 'POST'])
 def welcome():
-    return "Hello World!"
+    # cara menggunakan .env
+    SECRET_KEY = environ.get('SECRET_KEY')
+    API_KEY = environ.get('API_KEY')    
+    return f"Hello! API_KEY: {API_KEY}. SECRET_KEY: {SECRET_KEY}"
 
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    # Cara menggunakan
+    # if environ.get('FLASK_ENV') == 'development':
+    #     app.config['DEBUG'] = True
+    # else:
+    #     app.config['DEBUG'] = False
+    app.run(debug=True)
