@@ -21,5 +21,5 @@ CMD [ "pipenv", "run", "gunicorn",  "--bind",  "0.0.0.0:8080", "app:app"]
 # Command to run the Flask application
 # CMD ["python3", "app.py"]
 
-#  docker build -t nba_teams_api_gunicorn .
+# docker build -t nba_teams_api_gunicorn .
 # docker run -p 5005:5000 'nba_teams_api_gunicorn'
